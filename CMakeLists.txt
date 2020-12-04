@@ -144,6 +144,7 @@ install(TARGETS butler_tf_broadcaster butler_base_link_tf_br butler_tf_listener 
 
 ## Mark other files for installation (e.g. launch and bag files, etc.)
 install(FILES
+  butler_robot_commissary.launch
   coach_butler_robot_gazebo.launch
   coach_butler_robot_rviz_bringup.launch
   # myfile2
