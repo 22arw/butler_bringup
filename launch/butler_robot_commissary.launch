@@ -32,68 +32,54 @@
   <node name="butler_base_link_tf_br" pkg="butler_bringup" type="butler_base_link_tf_br" args="/coach_butler_robot" output="screen"/>
   <node name="butler_base_link_tf_ls" pkg="butler_bringup" type="butler_base_link_tf_ls" output="screen"/>
 
-
-
+<!--
   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" args="-model coach_butler_robot -param robot_description" output="screen"/>
 
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" output="screen" args="-model coach_butler_robot -param robot_description"/>
 
-
    <node pkg="tf2_ros" type="static_transform_publisher" name="base_link_front_laser" args="0.26865 0 0.043175 0 0 0 1.0 /base_link /front_laser"/>
+-->
 
+<!--TRANSFORM FRAMES (TF)-->
+<!-- WHEELS-->
 
-
-
-
-
-
-<!--
    <node pkg="butler_bringup" type="butler_left_wheel_tf_br"
         name="base_link_left_wheel" args="/coach_butler_robot" output="screen"/>
-
-        <node pkg="butler_bringup" type="butler_left_wheel_tf_ls"
-             name="base_link_left_wheel_ls" output="screen"/>
 
    <node pkg="butler_bringup" type="butler_right_wheel_tf_br"
        name="base_link_right_wheel" args="/coach_butler_robot" output="screen"/>
 
-       <node pkg="butler_bringup" type="butler_right_wheel_tf_ls"
-           name="base_link_right_wheel_ls" output="screen"/>
+<!-- SWIVELS -->
 
-   <node pkg="butler_bringup" type="butler_left_swivel_tf_br"
-        name="base_link_left_swivel" args="/coach_butler_robot" output="screen"/>
+   <node pkg="butler_bringup" type="butler_front_left_swivel_tf_br"
+        name="base_link_front_left_swivel" args="/coach_butler_robot" output="screen"/>
 
-        <node pkg="butler_bringup" type="butler_left_swivel_tf_ls"
-              name="base_link_left_swivel_ls" output="screen"/>
+   <node pkg="butler_bringup" type="butler_back_left_swivel_tf_br"
+         name="base_link_back_left_swivel" args="/coach_butler_robot" output="screen"/>
 
-   <node pkg="butler_bringup" type="butler_right_swivel_tf_br"
-        name="base_link_right_swivel" args="/coach_butler_robot" output="screen"/>
+   <node pkg="butler_bringup" type="butler_front_right_swivel_tf_br"
+        name="base_link_front_right_swivel" args="/coach_butler_robot" output="screen"/>
 
-        <node pkg="butler_bringup" type="butler_right_swivel_tf_ls"
-             name="base_link_right_swivel_ls" output="screen"/>
+   <node pkg="butler_bringup" type="butler_back_right_swivel_tf_br"
+        name="base_link_back_right_swivel" args="/coach_butler_robot" output="screen"/>
+
+<!-- CASTERS -->
+
+   <node pkg="butler_bringup" type="butler_front_right_caster_tf_br"
+         name="front_right_swivel_front_right_caster" args="/coach_butler_robot" output="screen"/>
+
+   <node pkg="butler_bringup" type="butler_back_right_caster_tf_br"
+         name="back_right_swivel_front_right_caster" args="/coach_butler_robot" output="screen"/>
+
+   <node pkg="butler_bringup" type="butler_front_left_caster_tf_br"
+         name="front_left_swivel_front_left_caster" args="/coach_butler_robot" output="screen"/>
+
+   <node pkg="butler_bringup" type="butler_back_left_caster_tf_br"
+         name="back_right_swivel_front_left_caster" args="/coach_butler_robot" output="screen"/>
+
+<!-- LASER -->
 
    <node pkg="butler_bringup" type="butler_front_laser_tf_br"
          name="base_link_front_laser" args="/coach_butler_robot" output="screen"/>
 
-         <node pkg="butler_bringup" type="butler_front_laser_tf_ls"
-               name="base_link_front_laser_ls" output="screen"/>
-
-   <node pkg="butler_bringup" type="butler_rear_laser_tf_br"
-         name="base_link_rear_laser" args="/coach_butler_robot" output="screen"/>
-
-         <node pkg="butler_bringup" type="butler_rear_laser_tf_ls"
-               name="base_link_rear_laser_ls" output="screen"/>
-
-   <node pkg="butler_bringup" type="butler_left_caster_tf_br"
-         name="base_link_left_caster" args="/coach_butler_robot" output="screen"/>
-
-         <node pkg="butler_bringup" type="butler_left_caster_tf_ls"
-              name="base_link_left_caster_ls" output="screen"/>
-
-   <node pkg="butler_bringup" type="butler_right_caster_tf_br"
-         name="base_link_right_caster" args="/coach_butler_robot" output="screen"/>
-
-         <node pkg="butler_bringup" type="butler_right_caster_tf_ls"
-               name="base_link_right_caster_ls" output="screen"/>
--->
 </launch>

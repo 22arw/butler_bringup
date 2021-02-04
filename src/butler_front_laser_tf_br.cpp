@@ -12,9 +12,9 @@ int main(int argc, char** argv){
 
   transformStamped.header.frame_id = "base_link";
   transformStamped.child_frame_id = "front_laser";
-  transformStamped.transform.translation.x = 0.26865;
-  transformStamped.transform.translation.y = 0;
-  transformStamped.transform.translation.z = 0.043175;
+  transformStamped.transform.translation.x = 0;
+  transformStamped.transform.translation.y = -0.38239;
+  transformStamped.transform.translation.z = 0.15967;
   tf2::Quaternion q;
         q.setRPY(0, 0, 0);
   transformStamped.transform.rotation.x = q.x();

@@ -49,15 +49,10 @@ target_link_libraries(butler_base_link_tf_ls ${catkin_LIBRARIES})
 
 ######## ADDED FRAMES #######
 
-#### Wheels
+##### Wheels
 
 add_executable(butler_left_wheel_tf_br src/butler_left_wheel_tf_br.cpp)
 target_link_libraries(butler_left_wheel_tf_br
- ${catkin_LIBRARIES}
-)
-
-add_executable(butler_left_wheel_tf_ls src/butler_left_wheel_tf_ls.cpp)
-target_link_libraries(butler_left_wheel_tf_ls
  ${catkin_LIBRARIES}
 )
 
@@ -66,73 +61,50 @@ target_link_libraries(butler_right_wheel_tf_br
  ${catkin_LIBRARIES}
 )
 
-add_executable(butler_right_wheel_tf_ls src/butler_right_wheel_tf_ls.cpp)
-target_link_libraries(butler_right_wheel_tf_ls
+##### Swivels
+
+add_executable(butler_front_left_swivel_tf_br src/butler_front_left_swivel_tf_br.cpp)
+target_link_libraries(butler_front_left_swivel_tf_br
+ ${catkin_LIBRARIES}
+)
+add_executable(butler_back_left_swivel_tf_br src/butler_back_left_swivel_tf_br.cpp)
+target_link_libraries(butler_back_left_swivel_tf_br
  ${catkin_LIBRARIES}
 )
 
-#### Swivels
-
-add_executable(butler_left_swivel_tf_br src/butler_left_swivel_tf_br.cpp)
-target_link_libraries(butler_left_swivel_tf_br
+add_executable(butler_front_right_swivel_tf_br src/butler_front_right_swivel_tf_br.cpp)
+target_link_libraries(butler_front_right_swivel_tf_br
  ${catkin_LIBRARIES}
 )
 
-add_executable(butler_left_swivel_tf_ls src/butler_left_swivel_tf_ls.cpp)
-target_link_libraries(butler_left_swivel_tf_ls ${catkin_LIBRARIES})
-
-
-add_executable(butler_right_swivel_tf_br src/butler_right_swivel_tf_br.cpp)
-target_link_libraries(butler_right_swivel_tf_br
- ${catkin_LIBRARIES}
-)
-
-add_executable(butler_right_swivel_tf_ls src/butler_right_swivel_tf_ls.cpp)
-target_link_libraries(butler_right_swivel_tf_ls
- ${catkin_LIBRARIES}
-)
-
-####### Lasers
-
-add_executable(butler_front_laser_tf_br src/butler_front_laser_tf_br.cpp)
-target_link_libraries(butler_front_laser_tf_br
- ${catkin_LIBRARIES}
-)
-
-add_executable(butler_front_laser_tf_ls src/butler_front_laser_tf_ls.cpp)
-target_link_libraries(butler_front_laser_tf_ls
- ${catkin_LIBRARIES}
-)
-
-add_executable(butler_rear_laser_tf_br src/butler_rear_laser_tf_br.cpp)
-target_link_libraries(butler_rear_laser_tf_br
- ${catkin_LIBRARIES}
-)
-
-add_executable(butler_rear_laser_tf_ls src/butler_rear_laser_tf_ls.cpp)
-target_link_libraries(butler_rear_laser_tf_ls
+add_executable(butler_back_right_swivel_tf_br src/butler_back_right_swivel_tf_br.cpp)
+target_link_libraries(butler_back_right_swivel_tf_br
  ${catkin_LIBRARIES}
 )
 
 ##### Casters
 
-add_executable(butler_left_caster_tf_br src/butler_left_caster_tf_br.cpp)
-target_link_libraries(butler_left_caster_tf_br
+add_executable(butler_front_left_caster_tf_br src/butler_front_left_caster_tf_br.cpp)
+target_link_libraries(butler_front_left_caster_tf_br
+ ${catkin_LIBRARIES}
+)
+add_executable(butler_back_left_caster_tf_br src/butler_back_left_caster_tf_br.cpp)
+target_link_libraries(butler_back_left_caster_tf_br
+ ${catkin_LIBRARIES}
+)
+add_executable(butler_front_right_caster_tf_br src/butler_front_right_caster_tf_br.cpp)
+target_link_libraries(butler_front_right_caster_tf_br
+ ${catkin_LIBRARIES}
+)
+add_executable(butler_back_right_caster_tf_br src/butler_back_right_caster_tf_br.cpp)
+target_link_libraries(butler_back_right_caster_tf_br
  ${catkin_LIBRARIES}
 )
 
-add_executable(butler_left_caster_tf_ls src/butler_left_caster_tf_ls.cpp)
-target_link_libraries(butler_left_caster_tf_ls
- ${catkin_LIBRARIES}
-)
+##### Lasers
 
-add_executable(butler_right_caster_tf_br src/butler_right_caster_tf_br.cpp)
-target_link_libraries(butler_right_caster_tf_br
- ${catkin_LIBRARIES}
-)
-
-add_executable(butler_right_caster_tf_ls src/butler_right_caster_tf_ls.cpp)
-target_link_libraries(butler_right_caster_tf_ls
+add_executable(butler_front_laser_tf_br src/butler_front_laser_tf_br.cpp)
+target_link_libraries(butler_front_laser_tf_br
  ${catkin_LIBRARIES}
 )
 
