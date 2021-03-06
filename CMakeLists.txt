@@ -223,6 +223,21 @@ target_link_libraries(butler_rear_laser_tf_ls
  ${catkin_LIBRARIES}
 )
 
+######## Camera ########
+
+# Front Camera Broadcaster
+add_executable(butler_front_camera_tf_br src/butler_front_camera_tf_br.cpp)
+target_link_libraries(butler_front_camera_tf_br
+ ${catkin_LIBRARIES}
+)
+
+# Front Camera Listener
+
+add_executable(butler_front_camera_tf_ls src/butler_front_camera_tf_ls.cpp)
+target_link_libraries(butler_front_camera_tf_ls
+ ${catkin_LIBRARIES}
+)
+
 
 # Install the executable
 install(TARGETS butler_tf_broadcaster butler_base_link_tf_br butler_tf_listener butler_base_link_tf_ls
@@ -235,6 +250,9 @@ install(FILES
   butler_robot_commissary.launch
   coach_butler_robot_gazebo.launch
   coach_butler_robot_rviz_bringup.launch
+  commissary_v2.launch
+  butler_tf.launch
+  
   # myfile2
  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )

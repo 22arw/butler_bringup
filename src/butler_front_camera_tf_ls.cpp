@@ -4,7 +4,7 @@
 
 int main(int argc, char** argv){
 
-    ros::init(argc, argv, "butler_front_left_swivel_tf_ls");
+    ros::init(argc, argv, "butler_front_camera_tf_ls");
 
     ros::NodeHandle node;
 
@@ -18,8 +18,8 @@ int main(int argc, char** argv){
         geometry_msgs::TransformStamped tfStamped;
 
         try {
-            
-            tfStamped = tfBuffer.lookupTransform("front_left_swivel", "base_link", ros::Time(0));
+          
+            tfStamped = tfBuffer.lookupTransform("front_camera", "base_link", ros::Time(0));
 
         }
         catch (tf2::LookupException &ex) {
