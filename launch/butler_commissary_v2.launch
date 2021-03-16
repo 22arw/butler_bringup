@@ -32,14 +32,15 @@
 <!-- Pull Transform Frames Launch Files -->
   <include file="$(find butler_bringup)/launch/butler_tf.launch"/>
 
+<!-- Launch gmapping from butler_navigation package  -->
+  <include file="$(find butler_navigation)/launch/butler_mapping.launch"/>
 <!-- Open Rviz File -->
   <!--arg name="rvizconfig" default="$(find butler_rviz)/rviz_lasers_config.rviz" /-->
   <arg name="rvizconfig" default="$(find butler_rviz)/coach_rviz_config.rviz" />
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
 
 <!-- Joint State Publisher -->
-  <node if="$(arg gui)" name="joint_state_publisher" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" />
-  <node unless="$(arg gui)" name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
-
+   <node if="$(arg gui)" name="joint_state_publisher" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" />
+   <node unless="$(arg gui)" name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
 
 </launch>
