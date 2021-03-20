@@ -19,7 +19,8 @@
   </include>
 
   <param name="robot_description" command="$(find xacro)/xacro $(arg model)" />
-  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" args="-z 0.1 -unpause -urdf -model coach_butler_robot -param robot_description" respawn="false" output="screen" />
+  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" args="-z 0.1 -unpause -urdf -model covid_killer_robot -param robot_description" respawn="false" output="screen" />
+
   <rosparam file="$(find butler_control)/config/coach_butler_robot_diff_drive.yaml" command="load" ns="diff_drive_ctrl" />
   <node name="controller_spawner" pkg="controller_manager" type="spawner" args="diff_drive_ctrl" />
   <node name="rqt_robot_steering" pkg="rqt_robot_steering" type="rqt_robot_steering">
@@ -27,19 +28,20 @@
   </node>
 
 <!-- Robot State Publisher -->
-   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" output="screen" args="-model coach_butler_robot -param robot_description"/>
+  <!--node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" output="screen" args="-model coach_butler_robot -param robot_description"/-->
 
 <!-- Pull Transform Frames Launch File-->
-   <!--include file="$(find butler_bringup)/launch/butler_tf.launch"/-->
+  <include file="$(find butler_bringup)/launch/butler_tf.launch"/>
+
+<!-- Launch gmapping from butler_navigation package  -->
+  <!--include file="$(find butler_navigation)/launch/butler_mapping.launch"/-->
 
 <!-- Open Rviz File-->
-    <!--arg name="rvizconfig" default="$(find butler_rviz)/rviz_lasers_config.rviz" /-->
-  <arg name="rvizconfig" default="$(find butler_rviz)/coach_rviz_config.rviz" />
+  <arg name="rvizconfig" default="$(find butler_description)/rviz/sensors.rviz" />
+
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
 
 <!-- Joint State Publisher -->
-  <node if="$(arg gui)" name="joint_state_publisher" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" />
-  <node unless="$(arg gui)" name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
-
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
 
 </launch>
