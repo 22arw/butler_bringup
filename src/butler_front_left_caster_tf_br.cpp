@@ -14,7 +14,7 @@ int main(int argc, char** argv){
   transformStamped.child_frame_id = "front_left_caster";
   transformStamped.transform.translation.x = -0.04445;
   transformStamped.transform.translation.y = 0;
-  transformStamped.transform.translation.z = -0.071438;
+  transformStamped.transform.translation.z = -0.0714375;
   tf2::Quaternion q;
         q.setRPY(0, 0, 0);
   transformStamped.transform.rotation.x = q.x();
