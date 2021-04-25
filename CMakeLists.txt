@@ -240,7 +240,7 @@ target_link_libraries(butler_front_camera_tf_ls
 
 
 # Install the executable
-install(TARGETS butler_tf_broadcaster butler_base_link_tf_br butler_tf_listener butler_base_link_tf_ls
+install(TARGETS butler_tf_broadcaster butler_tf_listener butler_base_link_tf_br butler_base_link_tf_ls butler_back_left_caster_tf_br butler_back_left_caster_tf_ls butler_back_left_swivel_tf_br butler_back_left_swivel_tf_ls butler_back_right_caster_tf_br butler_back_right_caster_tf_ls butler_back_right_swivel_tf_br butler_back_right_swivel_tf_ls butler_front_left_caster_tf_br butler_front_left_caster_tf_ls butler_front_left_swivel_tf_br butler_front_left_swivel_tf_ls butler_front_right_caster_tf_br butler_front_right_caster_tf_ls butler_front_right_swivel_tf_br butler_front_right_swivel_tf_ls butler_front_laser_tf_br butler_front_laser_tf_ls butler_rear_laser_tf_br butler_rear_laser_tf_ls butler_front_camera_tf_br butler_front_camera_tf_ls butler_right_wheel_tf_br butler_right_wheel_tf_ls butler_left_wheel_tf_br butler_left_wheel_tf_ls
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
@@ -252,7 +252,7 @@ install(FILES
   coach_butler_robot_rviz_bringup.launch
   commissary_v2.launch
   butler_tf.launch
-  
+
   # myfile2
  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
