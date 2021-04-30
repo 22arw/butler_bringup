@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<launch>
+
+
+    <!-- Start gazebo paused-->
+    <arg name="paused" default="true"/>
+    <!-- Use sim time-->
+    <arg name="use_sim_time" default="true"/>
+    <!-- Bring up the gazebo gui or have it running in the background-->
+    <arg name="gui" default="true"/>
+    <!-- Headless-->
+    <arg name="headless" default="false"/>
+    <!-- Start in debug mode-->
+    <arg name="debug" default="false"/>
+    <!-- Model to spawn into Gazebo-->
+    <arg name="model" default="$(find butler_description)/urdf/coach_butler_robot.urdf"/>
+    <!-- World file to start Gazebo with-->
+    <arg name="world" default="$(find butler_gazebo)/worlds/commissary_v2.world"/>
+    <!-- Config file for rviz-->
+    <arg name="rvizconfig" default="$(find butler_description)/rviz/full_gmap.rviz" />
+    <!-- Open Rviz on start-->
+    <arg name="startRviz" default="true" />
+    <!-- Start robot state publisher-->
+    <arg name="useRobotStatePublisher" default="false" />
+    <!-- Use transform frames-->
+    <arg name="useTFFrames" default="true" />
+    <!-- Launch the gmapping node-->
+    <arg name="launchGmapping" default="true" />
+
+ <!-- Open Gazebo Commissary World -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="debug" value="$(arg debug)" />
+        <arg name="gui" value="$(arg gui)" />
+        <arg name="paused" value="$(arg paused)"/>
+        <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+        <arg name="headless" value="$(arg headless)"/>
+        <arg name="world_name" value="$(arg world)"/>
+    </include>
+
+    <param name="robot_description" command="$(find xacro)/xacro $(arg model)" />
+    <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" args="-z 0.1 -unpause -urdf -model coach_butler_robot -param robot_description" respawn="false" output="screen" />
+
+    <rosparam file="$(find butler_control)/config/coach_butler_robot_diff_drive.yaml" command="load" ns="diff_drive_ctrl" />
+        <node name="controller_spawner" pkg="controller_manager" type="spawner" args="diff_drive_ctrl" />
+        <node name="rqt_robot_steering" pkg="rqt_robot_steering" type="rqt_robot_steering">
+        <param name="default_topic" value="/diff_drive_ctrl/cmd_vel"/>
+    </node>
+
+    <group if="$(arg useRobotStatePublisher)">
+      <!--Robot State Publisher-->
+      <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+    </group>
+
+    <group if="$(arg useTFFrames)">
+      <!-- Pull Transform Frames Launch Files -->
+      <include file="$(find butler_bringup)/launch/butler_tf.launch"/>
+    </group>
+
+    <group if="$(arg launchGmapping)">
+      <!-- Launch GMapping from butler_navigation package  -->
+      <include file="$(find butler_navigation)/launch/butler_mapping.launch"/>
+    </group>
+
+    <group if="$(arg startRviz)">
+      <!-- Show in Rviz   -->
+      <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
+    </group>
+
+    <!-- Joint State Publisher -->
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" args="-model coach_butler_robot -param robot_description" output="screen"/> />
+
+</launch>
