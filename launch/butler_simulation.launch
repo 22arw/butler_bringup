@@ -26,6 +26,8 @@
     <arg name="useTFFrames" default="true" />
     <!-- Launch the gmapping node-->
     <arg name="launchGmapping" default="true" />
+    <!-- Launch costmap navigation-->
+    <arg name="launchCostMaps" default="true" />
 
  <!-- Open Gazebo Commissary World -->
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
@@ -68,5 +70,10 @@
 
     <!-- Joint State Publisher -->
     <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" args="-model coach_butler_robot -param robot_description" output="screen"/> />
+
+    <group if="$(arg launchCostMaps)">
+      <!-- Launch costmap navigation-->
+      <include file="$(find butler_navigation)/launch/butler_costmaps.launch"/>
+    </group>
 
 </launch>
