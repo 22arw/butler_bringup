@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <launch>
     <remap from="cmd_vel" to="diff_drive_ctrl/cmd_vel" />
+
     <!-- Start gazebo paused-->
     <arg name="paused" default="true"/>
     <!-- Use sim time-->
@@ -24,9 +25,13 @@
     <!-- Use transform frames-->
     <arg name="useTFFrames" default="true" />
     <!-- Launch the gmapping node-->
-    <arg name="launchGmapping" default="true" />
+    <arg name="launchGmapping" default="false" />
     <!-- Launch costmap navigation-->
-    <arg name="launchCostMaps" default="true" />
+    <arg name="launchCostMaps" default="false" />
+    <!-- Turn robot 90 degrees from Start -->
+    <arg name="yaw" default="-1.57" />
+    <!-- Launch teleop keyboard control node -->
+    <arg name="launchTeleopKeyboard" default="true" />
 
  <!-- Open Gazebo Commissary World -->
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
@@ -39,13 +44,16 @@
     </include>
 
     <param name="robot_description" command="$(find xacro)/xacro $(arg model)" />
-    <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" args="-z 0.1 -unpause -urdf -model coach_butler_robot -param robot_description" respawn="false" output="screen" />
+    <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" args="-z 0.1 -unpause -urdf -model coach_butler_robot -param robot_description -Y $(arg yaw)" respawn="false" output="screen" />
 
     <rosparam file="$(find butler_control)/config/coach_butler_robot_diff_drive.yaml" command="load" ns="diff_drive_ctrl" />
-        <node name="controller_spawner" pkg="controller_manager" type="spawner" args="diff_drive_ctrl" />
-        <node name="rqt_robot_steering" pkg="rqt_robot_steering" type="rqt_robot_steering">
-        <param name="default_topic" value="/diff_drive_ctrl/cmd_vel"/>
+      <node name="controller_spawner" pkg="controller_manager" type="spawner" args="diff_drive_ctrl" />
+      <node name="rqt_robot_steering" pkg="rqt_robot_steering" type="rqt_robot_steering">
+      <param name="default_topic" value="/diff_drive_ctrl/cmd_vel"/>
     </node>
+
+    <!-- Joint State Publisher -->
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" args="-model coach_butler_robot -param robot_description" output="screen"/> />
 
     <group if="$(arg useRobotStatePublisher)">
       <!--Robot State Publisher-->
@@ -63,16 +71,18 @@
     </group>
 
     <group if="$(arg startRviz)">
-      <!-- Show in Rviz   -->
+      <!-- Show in Rviz -->
       <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
     </group>
-
-    <!-- Joint State Publisher -->
-    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" args="-model coach_butler_robot -param robot_description" output="screen"/> />
 
     <group if="$(arg launchCostMaps)">
       <!-- Launch costmap navigation-->
       <include file="$(find butler_navigation)/launch/butler_costmaps.launch"/>
+    </group>
+
+    <group if="$(arg launchTeleopKeyboard)">
+      <!-- Launch teleop keyboard control-->
+      <include file="$(find butler_control)/launch/teleop_keyboard.launch"/>
     </group>
 
 </launch>
