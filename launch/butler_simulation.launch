@@ -33,7 +33,7 @@
     <arg name="yaw" default="-1.57" />
     <!-- Launch teleop keyboard control node -->
     <arg name="launchTeleopKeyboard" default="false" />
-    <!-- Launch teleop keyboard control node -->
+    <!-- Launch teleop Joystick Control node (Requires Connection with Xbox 1 Controller) -->
     <arg name="launchTeleopJoystick" default="false" />
 
  <!-- Open Gazebo Commissary World -->
@@ -89,7 +89,7 @@
     </group>
 
     <group if="$(arg launchTeleopJoystick)">
-      <!-- Launch teleop keyboard control-->
+      <!-- Launch teleop Joystick Control-->
       <include file="$(find butler_control)/launch/teleop_joystick.launch"/>
     </group>
 
