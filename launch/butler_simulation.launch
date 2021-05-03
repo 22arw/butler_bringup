@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <launch>
     <remap from="cmd_vel" to="diff_drive_ctrl/cmd_vel" />
+    <remap from="front_laser_scan" to="scan" />
 
     <!-- Start gazebo paused-->
     <arg name="paused" default="true"/>
