@@ -16,7 +16,7 @@
     <!-- Model to spawn into Gazebo-->
     <arg name="model" default="$(find butler_description)/urdf/coach_butler_robot.urdf"/>
     <!-- World file to start Gazebo with-->
-    <arg name="world" default="$(find butler_gazebo)/worlds/commissary_v2.world"/>
+    <arg name="world" default="$(find butler_gazebo)/worlds/commissary.world"/>
     <!-- Config file for rviz-->
     <arg name="rvizconfig" default="$(find butler_description)/rviz/full_gmap.rviz" />
     <!-- Open Rviz on start-->
@@ -32,7 +32,9 @@
     <!-- Turn robot 90 degrees from Start -->
     <arg name="yaw" default="-1.57" />
     <!-- Launch teleop keyboard control node -->
-    <arg name="launchTeleopKeyboard" default="true" />
+    <arg name="launchTeleopKeyboard" default="false" />
+    <!-- Launch teleop keyboard control node -->
+    <arg name="launchTeleopJoystick" default="false" />
 
  <!-- Open Gazebo Commissary World -->
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
@@ -47,7 +49,7 @@
     <param name="robot_description" command="$(find xacro)/xacro $(arg model)" />
     <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" args="-z 0.1 -unpause -urdf -model coach_butler_robot -param robot_description -Y $(arg yaw)" respawn="false" output="screen" />
 
-    <rosparam file="$(find butler_control)/config/coach_butler_robot_diff_drive.yaml" command="load" ns="diff_drive_ctrl" />
+    <rosparam file="$(find butler_control)/config/butler_diff_drive.yaml" command="load" ns="diff_drive_ctrl" />
       <node name="controller_spawner" pkg="controller_manager" type="spawner" args="diff_drive_ctrl" />
       <node name="rqt_robot_steering" pkg="rqt_robot_steering" type="rqt_robot_steering">
       <param name="default_topic" value="/diff_drive_ctrl/cmd_vel"/>
@@ -84,6 +86,11 @@
     <group if="$(arg launchTeleopKeyboard)">
       <!-- Launch teleop keyboard control-->
       <include file="$(find butler_control)/launch/teleop_keyboard.launch"/>
+    </group>
+
+    <group if="$(arg launchTeleopJoystick)">
+      <!-- Launch teleop keyboard control-->
+      <include file="$(find butler_control)/launch/teleop_joystick.launch"/>
     </group>
 
 </launch>
