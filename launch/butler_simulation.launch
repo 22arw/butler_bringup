@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 <launch>
-
-
+    <remap from="cmd_vel" to="diff_drive_ctrl/cmd_vel" />
     <!-- Start gazebo paused-->
     <arg name="paused" default="true"/>
     <!-- Use sim time-->
