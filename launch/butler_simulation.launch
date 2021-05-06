@@ -23,7 +23,7 @@
     <arg name="startRviz" default="true" />
     <!-- Start robot state publisher-->
     <arg name="useRobotStatePublisher" default="false" />
-    <!-- Use transform frames-->
+    <!-- Use transform frames (Either use TF or Robot State Publisher)-->
     <arg name="useTFFrames" default="true" />
     <!-- Launch the gmapping node-->
     <arg name="launchGmapping" default="false" />
@@ -49,7 +49,10 @@
     <param name="robot_description" command="$(find xacro)/xacro $(arg model)" />
     <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" args="-z 0.1 -unpause -urdf -model coach_butler_robot -param robot_description -Y $(arg yaw)" respawn="false" output="screen" />
 
+<!-- Load butler_diff_drive YAML file -->
     <rosparam file="$(find butler_control)/config/butler_diff_drive.yaml" command="load" ns="diff_drive_ctrl" />
+<!-- Load pid_gains YAML file -->
+    <rosparam file="$(find butler_control)/config/pid_gains.yaml" command="load"/>
       <node name="controller_spawner" pkg="controller_manager" type="spawner" args="diff_drive_ctrl" />
       <node name="rqt_robot_steering" pkg="rqt_robot_steering" type="rqt_robot_steering">
       <param name="default_topic" value="/diff_drive_ctrl/cmd_vel"/>

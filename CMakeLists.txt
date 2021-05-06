@@ -229,12 +229,8 @@ install(TARGETS butler_tf_broadcaster butler_tf_listener butler_base_link_tf_br 
 
 ## Mark other files for installation (e.g. launch and bag files, etc.)
 install(FILES
-  butler_robot_commissary.launch
-  coach_butler_robot_gazebo.launch
-  coach_butler_robot_rviz_bringup.launch
-  commissary_v2.launch
+  butler_simulation.launch
   butler_tf.launch
 
-  # myfile2
  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
